@@ -1,5 +1,3 @@
-# devtools::install_github("ColinFay/rgeoapi")
-
 library(ggplot2)
 library(maps)
 library(leaflet)
