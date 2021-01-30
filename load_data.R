@@ -1,6 +1,6 @@
 setwd("D:/Documents/M2 SISE/Text Mining/Projet")
 
-#chargement des données
+#chargement des donnÃ©es
 library(readxl)
 data=read_xlsx("BDD_CEDA_dec_2020_complete - ANONYME.xlsx", na="NC")
 
@@ -20,13 +20,13 @@ data <- subset(data, is.na(data$Attentes)==F)
 data$Famille=as.factor(data$Famille)
 table(data$Famille)
 #recodage
-data$Famille.reg[data$Famille == "1 parent (mère)"] <- "1 parent"
+data$Famille.reg[data$Famille == "1 parent (mÃ¨re)"] <- "1 parent"
 data$Famille.reg[data$Famille == "1 parent"] <- "1 parent"
-data$Famille.reg[data$Famille == "1 parent (père)"] <- "1 parent"
+data$Famille.reg[data$Famille == "1 parent (pÃ¨re)"] <- "1 parent"
 data$Famille.reg[data$Famille == "1 parent / famille d'accueil"] <- "famille accueil"
-data$Famille.reg[data$Famille == "1 parents (mère)"] <- "1 parent"
+data$Famille.reg[data$Famille == "1 parents (mÃ¨re)"] <- "1 parent"
 data$Famille.reg[data$Famille == "2 parents"] <- "2 parents"
-data$Famille.reg[data$Famille == "2 parents (mère + beau-père)"] <- "2 parents"
+data$Famille.reg[data$Famille == "2 parents (mÃ¨re + beau-pÃ¨re)"] <- "2 parents"
 data$Famille.reg[data$Famille == "famille accueil"] <- "famille accueil"
 table(data$Famille.reg)
 
@@ -56,31 +56,31 @@ data$anneeEnfant.reg[data$anneeEnfant < 3] <- "perinatalite"
 data$anneeEnfant.reg[data$anneeEnfant < 11 & data$anneeEnfant >= 3] <- "enfant"
 data$anneeEnfant.reg[data$anneeEnfant >= 11 ] <- "ado"
 
-#Profession père
-data$`Profession père`=as.factor(data$`Profession père`)
-table(data$`Profession père`)
-nlevels(data$`Profession père`) #137 métiers 
-head(sort(table(data$`Profession père`), decreasing = T),10)
+#Profession pÃ¨re
+data$`Profession pÃ¨re`=as.factor(data$`Profession pÃ¨re`)
+table(data$`Profession pÃ¨re`)
+nlevels(data$`Profession pÃ¨re`) #137 mÃ©tiers 
+head(sort(table(data$`Profession pÃ¨re`), decreasing = T),10)
 #a regrouper selon CSP
 #https://www.insee.fr/fr/information/2406153
 
-#Profession mère
-data$`Profession mère`=as.factor(data$`Profession mère`)
-table(data$`Profession mère`)
-nlevels(data$`Profession mère`) #105 métiers 
-head(sort(table(data$`Profession mère`), decreasing = T),10)
+#Profession mÃ¨re
+data$`Profession mÃ¨re`=as.factor(data$`Profession mÃ¨re`)
+table(data$`Profession mÃ¨re`)
+nlevels(data$`Profession mÃ¨re`) #105 mÃ©tiers 
+head(sort(table(data$`Profession mÃ¨re`), decreasing = T),10)
 
-#DDN père
-#data$`DDN père`=as.numeric(data$`DDN père`)
-#data$`DDN père`=as.Date(data$`DDN père`, origin = "1899-12-30")
-#DDN mère
-data$`DDN mère`=as.numeric(data$`DDN mère`)
-data$`DDN mère`=as.Date(data$`DDN mère`, origin = "1899-12-30")
+#DDN pÃ¨re
+#data$`DDN pÃ¨re`=as.numeric(data$`DDN pÃ¨re`)
+#data$`DDN pÃ¨re`=as.Date(data$`DDN pÃ¨re`, origin = "1899-12-30")
+#DDN mÃ¨re
+data$`DDN mÃ¨re`=as.numeric(data$`DDN mÃ¨re`)
+data$`DDN mÃ¨re`=as.Date(data$`DDN mÃ¨re`, origin = "1899-12-30")
 
 #age parents au moment de la reception du questionnaire
 library(lubridate, warn.conflicts = FALSE)
-data$agePere=floor(time_length(interval(data$`DDN père`, data$`date réception questionnaire`), "years"))
-data$ageMere=floor(time_length(interval(data$`DDN mère`, data$`date réception questionnaire`), "years"))
+data$agePere=floor(time_length(interval(data$`DDN pÃ¨re`, data$`date rÃ©ception questionnaire`), "years"))
+data$ageMere=floor(time_length(interval(data$`DDN mÃ¨re`, data$`date rÃ©ception questionnaire`), "years"))
 
 #age ou ils ont eu leurs enfants
 data$agePereEnfant=data$agePere-data$anneeEnfant
@@ -110,8 +110,8 @@ table(data$Place.reg)
 
 
 #Sujet 1
-#Quelles sont les attentes des parents vis à vis d'une consultation en centre
-#spécialisé ? Ces attentes sont elles modulées par l'âge des enfants ? La place de
+#Quelles sont les attentes des parents vis Ã  vis d'une consultation en centre
+#spÃ©cialisÃ© ? Ces attentes sont elles modulÃ©es par l'Ã¢ge des enfants ? La place de
 #l'enfant dans la fratrie ? etc... 
 
 text=data$Attentes
